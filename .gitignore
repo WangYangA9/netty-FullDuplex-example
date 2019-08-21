@@ -1,0 +1,40 @@
+.gradle
+/build/
+/bin/
+target/
+!gradle/wrapper/gradle-wrapper.jar
+.DS_Store
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+.out
+.build
+.bin
+*build
+*bin
+out
+logs
+build
+bin
+##src/test/
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+baas-deploy-manager.iml
