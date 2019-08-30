@@ -2,11 +2,10 @@ package handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.util.ReferenceCountUtil;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.net.InetAddress;
@@ -44,8 +43,10 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
         MessageVO message = (MessageVO) msg;
         if (message.getUserName().equals("张1")) {
 //            System.out.println("收到"+ ((MessageVO) msg).getMessage());
-            ctx.writeAndFlush(new MessageVO("张1", "刚吃")).sync();
-            receive1 = true;
+            ChannelFuture f = ctx.writeAndFlush(new MessageVO("张1", "刚吃"));
+            f.addListener((GenericFutureListener) future -> {
+                receive1 = true;
+            });
         } else if(message.getUserName().equals("李1")){
             receive2 = true;
         } else if(message.getUserName().equals("李2")){
